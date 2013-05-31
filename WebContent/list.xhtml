@@ -1,0 +1,64 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="layout/base.xhtml">
+	<ui:define name="title">
+	    | Items
+	</ui:define>
+	<ui:define name="content">
+	    <h3>Items currently in stock</h3>
+	    <h:form id="select-item-form">
+	    <p:dataTable id="item-table" var="item" value="#{itemController.itemModel}"
+	    			 resizableColumns="true">
+	    	<f:facet name="header">
+	    		Items
+	    	</f:facet>
+		    	<p:column headerText="Number" size="20">
+		    		<h:outputText value="#{item.itemNumber}" />
+		    	</p:column>
+		    	<p:column headerText="Type" size="20">
+		    		<h:outputText value="#{item.itemShortDesc}" />
+		    	</p:column>
+		    	<p:column size="1">
+		    		<p:commandButton styleClass="btn-small" value="Add" action="#{cart.addItem(item)}" update=":growl" /> - 
+		    		<p:commandLink styleClass="inline" value="More info..." oncomplete="itemDialog.show()" title="Check" update=":add-item-form:display">
+				    	<f:setPropertyActionListener target="#{itemController.selectedItem}" value="#{item}" />
+				    </p:commandLink>
+		    	</p:column>
+	    </p:dataTable>
+	    </h:form>
+	    <p:dialog header="Item Details" widgetVar="itemDialog" resizable="false" id="item-dialog">
+	    	<h:form id="add-item-form">
+	    		<p:panelGrid id="display" styleClass="dialog-grid" columns="2">
+	    			<h:outputText value="Number" />
+	    			<h:outputText value="#{itemController.selectedItem.itemNumber}" />
+	    			
+	    			<h:outputText value="Type" />
+	    			<h:outputText value="#{itemController.selectedItem.itemShortDesc}" />
+	    			
+	    			<h:outputText value="Description" />
+	    			<h:outputText value="#{itemController.selectedItem.itemLongDesc}" />
+	    			
+	    			<h:outputText value="Quantity" />
+	    			<p:inputText label="Quantity" id="quantity" value="#{itemController.selectedItem.quantity}"
+	    						 required="true">
+	    				<f:validateLongRange minimum="1" maximum="100" />
+	    			</p:inputText>
+	    			<f:facet name="footer">
+	    				<p:commandButton value="Add to cart" update=":select-item-form, @form, :growl" 
+	    								 action="#{cart.addItem(itemController.selectedItem)}"
+	    								 oncomplete="if (!args.validationFailed) itemDialog.hide()" />
+	    			</f:facet>
+	    		</p:panelGrid>
+	    	</h:form>
+	    </p:dialog>
+	    
+	</ui:define>
+</ui:composition>
+</html>

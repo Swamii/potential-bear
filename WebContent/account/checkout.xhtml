@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="../layout/base.xhtml">
+	<ui:define name="title">
+	    | Checkout
+	</ui:define>
+	<ui:define name="content">
+		<h:outputText
+			value="Your cart is empty. Come back when it's filled up."
+			rendered="#{empty cart.items}" />
+		<h:form id="order-form" rendered="#{not empty cart.items}">
+			<h3>Order information</h3>
+			<hr />
+			<h4 class="extra-space">Customer information</h4>
+			<p:panelGrid id="customer-info" columns="2">
+				<h:outputText value="Customer ID" />
+				<h:outputText value="#{currentCustomer.customerId}" />
+				<h:outputText value="Login Name" />
+				<h:outputText value="#{currentCustomer.loginInfo.loginName}" />
+				<h:outputText value="First Name" />
+				<h:outputText value="#{currentCustomer.firstName}" />
+				<h:outputText value="Last Name" />
+				<h:outputText value="#{currentCustomer.lastName}" />
+				<h:outputText value="Email" />
+				<h:outputText value="#{currentCustomer.email}" />
+			</p:panelGrid>
+			<h4 class="extra-space">Items</h4>
+			<p:dataTable id="order-table" var="item" value="#{cart.items}">
+				<p:column headerText="Number">
+					<h:outputText value="#{item.itemNumber}" />
+				</p:column>
+				<p:column headerText="Short Description">
+					<h:outputText value="#{item.itemShortDesc}" />
+				</p:column>
+				<p:column headerText="Long Description">
+					<h:outputText value="#{item.itemLongDesc}" />
+				</p:column>
+				<p:column headerText="Quantity">
+					<h:outputText value="#{item.quantity}" />
+				</p:column>
+			</p:dataTable>
+			<h4 class="extra-space">Order Description</h4>
+			<p><p:inputTextarea value="#{orderController.newOrder.orderDescription}" rows="5" cols="50" counter="counter" maxlength="200"       
+    						 counterTemplate="{0} characters remaining." 
+    						 autoResize="false"/></p>
+    		<h:outputText id="counter" />
+			<p><p:commandButton value="Place order" action="#{orderController.placeOrder}" update=":growl" /></p>
+		</h:form>
+	</ui:define>
+</ui:composition>
+</html>

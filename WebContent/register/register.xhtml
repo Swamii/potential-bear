@@ -1,0 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="../layout/base.xhtml">
+	<ui:define name="title">
+	    | Register
+	</ui:define>
+	<ui:define name="content">
+	    <h:form id="register-form">
+		    <h:panelGrid id="register" columns="2" rowClasses="data-table-row">
+		    	<f:facet name="header">
+		    		<h4>Registration form</h4>
+		    	</f:facet>
+		    	<h:outputLabel value="Login Name" for="login-name"/>
+		    	<p:inputText label="Login Name" id="login-name" value="#{register.loginInfo.loginName}" required="true" />
+		    	<h:outputLabel value="Password" for="pwd1" />
+		    	<p:password label="Password" id="pwd1" value="#{register.loginInfo.password}" match="pwd2" required="true" />
+		    	<h:outputLabel value="Repeat" for="pwd2" />
+		    	<p:password label="Repeat-password" id="pwd2" value="#{register.loginInfo.password}" required="true" />
+		    	<h:outputLabel value="First Name" for="first-name" />
+		    	<p:inputText label="First Name" id="first-name" value="#{register.customer.firstName}" required="true" />
+		    	<h:outputLabel value="Last Name" for="last-name" />
+		    	<p:inputText label="Last Name" id="last-name" value="#{register.customer.lastName}" required="true" />
+		    	<h:outputLabel value="Email" for="email" />
+		    	<p:inputText id="email" required="true" label="Email" 
+		    				 validatorMessage="Invalid email format" value="#{register.customer.email}">
+		    		<f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+		    	</p:inputText>
+		    	<f:facet name="footer">
+				    <p:commandButton value="Register" action="#{register.register}" update="@form, :growl" />
+		    	</f:facet>
+		    </h:panelGrid>
+	    </h:form>
+	</ui:define>
+	<ui:define name="sidebar">
+		<h4>About membership</h4>
+		<p>Membership benefits include:</p>
+		<ol>
+			<li>Can order items</li>
+			<li>Can log in</li>
+			<li>Tax exemption</li>
+		</ol>
+	</ui:define>
+</ui:composition>
+</html>

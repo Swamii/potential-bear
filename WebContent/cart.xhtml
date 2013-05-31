@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="layout/base.xhtml">
+	<ui:define name="title">
+	    | Cart
+	</ui:define>
+	<ui:define name="content">
+	    <h4>Items in cart</h4>
+		<h:form id="cart-form">
+			<p:dataTable id="cart-table" var="item" resizableColumns="true"
+				value="#{cart.items}"
+				emptyMessage="Your cart is empty.">
+				<f:facet name="header">Items in cart</f:facet>
+				<p:column headerText="Number" width="1">
+					<h:outputText value="#{item.itemNumber}" />
+				</p:column>
+				<p:column headerText="Type" width="10">
+					<h:outputText value="#{item.itemShortDesc}" />
+				</p:column>
+				<p:column headerText="Description" width="20">
+					<h:outputText value="#{item.itemLongDesc}" />
+				</p:column>
+				<p:column headerText="Quantity" width="1">
+					<h:outputText value="#{item.quantity}" />
+				</p:column>
+				<p:column width="1">
+					<p:commandButton id="remove-button" styleClass="btn-small" 
+									 value="Remove" update="@form, :go-checkout, :growl"
+									 action="#{cart.removeItem(item)}">
+					</p:commandButton>
+				</p:column>
+			</p:dataTable>
+		</h:form>
+		<h:panelGroup id="go-checkout">
+			<h:outputLink styleClass="big-link" rendered="#{not empty cart.items}" value="account/checkout.xhtml">
+				<button class="big">Go to checkout &#187;</button>
+			</h:outputLink>
+		</h:panelGroup>
+	</ui:define>
+</ui:composition>
+</html>

@@ -1,0 +1,168 @@
+@CHARSET "UTF-8";
+
+* {
+	padding: 0;
+	margin: 0;
+}
+
+body {
+   font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+   font-weight: 300;
+   font-size: 16px;
+   background: whitesmoke;
+}
+
+a {
+	color: blue;
+	text-decoration: none;
+}
+	a:hover {
+		text-decoration: underline;
+	}
+
+h1 {
+	font-size: 72px;
+	margin: 5px 0;
+}
+
+h3 {
+	font-size: 36px;
+	margin: 5px 0;
+}
+
+h4 {
+	font-size: 24px;
+	margin: 5px 0;
+}
+h4.extra-space {
+	margin: 10px 0;
+}
+
+p {
+	padding: 3px 0;
+}
+
+button {
+	border: 1px solid #333333;
+	border-radius: 5px;
+	background: #77bbcc;
+	padding: 5px;
+	margin: 5px 0;
+}
+
+button:hover {
+	background: #6699cc;
+}
+
+button.big {
+	padding: 10px;
+	margin: 10px 0;
+	font-size: 20px;
+}
+
+.big-wrapper {
+	width: 95%;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+ol {
+	margin: 5px 0 5px 40px;
+}
+
+.container {
+	width: 100%;
+}
+
+.nav-wrapper {
+	padding-top: 0;
+	margin-bottom: 20px;
+}
+
+nav#main {
+	background: rgb(55,152,233);
+	background: -moz-linear-gradient(top,  rgba(55,152,233,1) 0%, rgba(47,110,244,1) 50%, rgba(46,150,233,1) 100%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(55,152,233,1)), color-stop(50%,rgba(47,110,244,1)), color-stop(100%,rgba(46,150,233,1)));
+	background: -webkit-linear-gradient(top,  rgba(55,152,233,1) 0%,rgba(47,110,244,1) 50%,rgba(46,150,233,1) 100%);
+	background: -o-linear-gradient(top,  rgba(55,152,233,1) 0%,rgba(47,110,244,1) 50%,rgba(46,150,233,1) 100%);
+	background: -ms-linear-gradient(top,  rgba(55,152,233,1) 0%,rgba(47,110,244,1) 50%,rgba(46,150,233,1) 100%);			
+	background: linear-gradient(to bottom,  rgba(55,152,233,1) 0%,rgba(47,110,244,1) 50%,rgba(46,150,233,1) 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3798e9', endColorstr='#2e96e9',GradientType=0 );
+}
+	nav#main > ul {
+		width: 95%;
+		margin-left: auto;
+		margin-right: auto;
+		list-style-type: none;
+		height: 60px;
+		border-left: 1px solid rgb(90,101,179);
+	}
+		nav#main > ul > li > a {
+			float: left;
+			line-height: 60px;
+			padding-left: 25px;
+			padding-right: 25px;
+			font-family: Georgia, "Times New Roman", Times, serif;
+			font-size: 30px;
+			color: black;
+			border-right: 1px solid rgb(90,101,179);
+		}
+		nav#main > ul > li a:hover {
+			text-decoration: none;
+			background: rgb(46,150,233);
+			background: -moz-linear-gradient(top,  rgba(46,150,233,1) 0%, rgba(47,110,244,1) 25%, rgba(47,110,244,1) 75%, rgba(55,152,233,1) 100%);
+			background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(46,150,233,1)), color-stop(25%,rgba(47,110,244,1)), color-stop(75%,rgba(47,110,244,1)), color-stop(100%,rgba(55,152,233,1)));
+			background: -webkit-linear-gradient(top,  rgba(46,150,233,1) 0%,rgba(47,110,244,1) 25%,rgba(47,110,244,1) 75%,rgba(55,152,233,1) 100%);
+			background: -o-linear-gradient(top,  rgba(46,150,233,1) 0%,rgba(47,110,244,1) 25%,rgba(47,110,244,1) 75%,rgba(55,152,233,1) 100%);
+			background: -ms-linear-gradient(top,  rgba(46,150,233,1) 0%,rgba(47,110,244,1) 25%,rgba(47,110,244,1) 75%,rgba(55,152,233,1) 100%);
+			background: linear-gradient(to bottom,  rgba(46,150,233,1) 0%,rgba(47,110,244,1) 25%,rgba(47,110,244,1) 75%,rgba(55,152,233,1) 100%);
+			filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#2e96e9', endColorstr='#3798e9',GradientType=0 );
+			color: #ccc;
+		}
+
+.content-wrapper {
+	padding-right: 3%;
+	float: left;
+	width: 64%;
+}
+
+.sidebar {
+	float: left;
+	width: 33%;
+}
+
+.clear {
+	clear: both;
+}
+
+footer#main {
+	padding-top: 20px;
+	width: 100%;
+	min-height: 60px;
+}
+	footer#main > hr {
+		margin-bottom: 10px;
+	}
+	footer#main > p {
+		text-align: center;
+	}
+	
+/* PRIMEFACES */
+
+.ui-widget, .ui-widget .ui-widget {
+	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+   	font-weight: 300;
+   	font-size: 16px;
+}
+
+.ui-widget a {
+	color: blue;
+}
+
+.btn-small > span {
+	font-size: 13px;
+}
+
+.data-table-row > td {
+	padding: 5px 5px 5px 0;
+}

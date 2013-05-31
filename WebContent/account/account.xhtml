@@ -1,0 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="../layout/base.xhtml">
+	<ui:define name="title">
+	    | Account
+	</ui:define>
+	<ui:define name="content">
+	    <h4>Customer Information</h4>
+	    <p:panelGrid id="customer-info" columns="2">
+	    	<h:outputText value="Customer ID"/>
+	    	<h:outputText value="#{currentCustomer.customerId}"/>
+	    	<h:outputText value="Login Name"/>
+	    	<h:outputText value="#{currentCustomer.loginInfo.loginName}"/>
+	    	<h:outputText value="First Name"/>
+	    	<h:outputText value="#{currentCustomer.firstName}"/>
+	    	<h:outputText value="Last Name"/>
+	    	<h:outputText value="#{currentCustomer.lastName}"/>
+	    	<h:outputText value="Email"/>
+	    	<h:outputText value="#{currentCustomer.email}"/>
+	    </p:panelGrid>
+	    <h4>Previous Orders</h4>
+	    <ui:repeat var="order" value="#{orderController.orders}">
+	    	<p:dataTable id="order-table#{order.orderId}" var="item" value="#{order.items}">
+	    		<f:facet name="header">
+	    		<p>Order #{order.orderNumber}</p>
+	    		<p>Description: #{order.orderDescription}</p>
+	    		</f:facet>
+	    		<p:column headerText="Number">
+	    			<h:outputText value="#{item.itemNumber}" />
+	    		</p:column>
+	    		<p:column headerText="Short Description">
+	    			<h:outputText value="#{item.itemShortDesc}" />
+	    		</p:column>
+	    		<p:column headerText="Long Description">
+	    			<h:outputText value="#{item.itemLongDesc}" />
+	    		</p:column>
+	    		<p:column headerText="Quantity">
+	    			<h:outputText value="#{item.quantity}" />
+	    		</p:column>
+	    	</p:dataTable>
+	    </ui:repeat>
+	</ui:define>
+</ui:composition>
+</html>

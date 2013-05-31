@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+	<h:head>
+		<title>
+			Item Store <ui:insert name="title"></ui:insert>
+		</title>
+	</h:head>
+
+	<h:body>
+		<h:outputStylesheet name="style.css" library="css" />
+		
+		<h:panelGroup id="nav-group">
+		<section class="container nav-wrapper">
+			<nav id="main">
+				<ul class="nav">
+					<li><a href="/ItemStore/">Home</a></li>
+					<li><a href="/ItemStore/list.xhtml">Items</a></li>
+					<li><a href="/ItemStore/cart.xhtml">Cart</a></li>
+					<ui:fragment rendered="#{auth.loggedIn}">
+						<li><a href="/ItemStore/account/account.xhtml">Account</a></li>
+					</ui:fragment>
+				</ul>
+			</nav>
+		</section>
+		</h:panelGroup>
+		<section class="big-wrapper">
+			<section class="container">
+				<section class="content-wrapper">
+					<ui:insert name="content">
+					</ui:insert>
+				</section>
+				<section class="sidebar">
+					<ui:insert name="sidebar">
+							<h:form id="logout-form">
+						<p:panel header="Welcome #{currentCustomer.firstName}" id="customer-panel" rendered="#{auth.loggedIn}">
+							<p>Hello #{currentCustomer.firstName}</p>
+							<p>Check your <a href="/ItemStore/account/account.xhtml">account page</a></p>
+								<p:commandButton id="submit" value="Log out" 
+												 update=":logout-form, :growl, :nav-group"
+												 action="#{auth.logout}" />
+						</p:panel>
+							</h:form>
+							<h:form id="login-form">
+							<p:panelGrid id="login-grid" columns="2" rendered="#{!auth.loggedIn}">
+							<f:facet name="header">
+								Please log in or <a href="/ItemStore/register/register.xhtml">Register</a>
+							</f:facet>
+								<h:outputLabel value="Login name" for="login-name" />	
+								<p:inputText id="login-name" label="Login name" value="#{auth.loginName}" required="true" 
+											 requiredMessage="Please enter a login name" />
+								<h:outputLabel value="Password" for="password" />
+								<p:password id="password" label="Password" value="#{auth.password}" required="true" 
+											requiredMessage="Please enter a password" />
+								<f:facet name="footer">
+								<p:commandButton id="submit" value="Submit" 
+												 update="@form, :logout-form, :growl, :nav-group" 
+												 action="#{auth.login}" />
+								</f:facet>				
+							</p:panelGrid>
+							</h:form>
+					</ui:insert>
+				</section>
+			</section>
+		
+			<footer id="main" class="clear">
+			<hr />
+				<p>Site made and managed by Akseli Nelander</p>
+			</footer>
+			
+		</section>
+		<p:growl id="growl" life="3000" />
+		<h:outputScript library="js" name="script.js" />
+	</h:body>
+
+</html>
